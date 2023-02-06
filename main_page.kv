@@ -1,0 +1,136 @@
+
+<ContentNavigationDrawer>:
+    orientation: "vertical"
+    padding: "8dp"
+    spacing: "8dp"
+
+    AnchorLayout:
+        anchor_x: "center"
+        size_hint_y: None
+        height: avatar.height
+
+        Image:
+            id: avatar
+            size_hint: None, None
+            size: "150dp", "150dp"
+            source: "Project/asset/profile.png"
+
+    MDLabel:
+        text: "User"
+        halign: "center"
+        font_style: "Button"
+        adaptive_height: True
+
+    MDLabel:
+        text: "user@gmail.com"
+        halign: "center"
+        font_style: "Caption"
+        adaptive_height: True
+
+    ScrollView:
+
+        MDList:
+
+            OneLineIconListItem:
+                text: "Profile"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 1"
+
+                IconLeftWidget:
+                    icon: "account"
+
+            OneLineIconListItem:
+                text: "Settings"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 2"
+
+                IconLeftWidget:
+                    icon: "cog"
+
+            OneLineIconListItem:
+                text: "Logout"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.manager.current = "login"
+
+                IconLeftWidget:
+                    icon: "logout"
+
+
+
+MDScreen:
+    name: "main_page"
+
+    MDNavigationLayout:
+
+        ScreenManager:
+            id: screen_manager
+
+            MDScreen:
+                name: "scr 1"
+                MDBoxLayout:
+                    orientation: 'vertical'
+
+                    MDTopAppBar:
+                        id: toolbar
+                        pos_hint: {"top": 1}
+                        elevation: 0
+                        title: "LOGO"
+                        left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+
+                    MDLabel:
+                        text: "Screen 1"
+                        halign: "center"
+                        canvas.before:
+                            Color:
+                                rgba: (1, 1, 0, 1)
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+
+                    MDBottomAppBar:
+
+                        MDTopAppBar:
+                            icon: 'home-outline'
+                            type: 'bottom'
+                            mode: "free-end"
+                            elevation: 0
+                            icon_color: 1, 0, 0, 1
+                            left_action_items: [["progress-check"]]
+                            right_action_items: [["clock"]]
+
+
+            MDScreen:
+                name: "scr 2"
+                MDBoxLayout:
+                    orientation: 'vertical'
+
+                    MDTopAppBar:
+                        id: toolbar
+                        pos_hint: {"top": 1}
+                        elevation: 0
+                        title: "LOGO"
+                        left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+                        right_action_items: [["dots-vertical"]]
+
+                    MDLabel:
+                        text: "Screen 2"
+                        halign: "center"
+                        canvas.before:
+                            Color:
+                                rgba: (1, 0, 1, 1)
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+
+        MDNavigationDrawer:
+            id: nav_drawer
+
+            ContentNavigationDrawer:
+                id: content_drawer
+                screen_manager: screen_manager
+                nav_drawer: nav_drawer
+                manager: root.manager
+

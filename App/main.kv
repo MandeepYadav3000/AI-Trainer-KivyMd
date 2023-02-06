@@ -1,0 +1,137 @@
+<ItemDrawer>:
+    theme_text_color: "Custom"
+
+    on_press:
+        self.parent.set_color_item(self)
+        app.root.ids.nav_drawer.set_state("close")
+        app.root.ids.screen_manager.current = self.text.lower()
+
+
+    IconLeftWidget:
+        id: icon
+        icon: root.icon
+        theme_text_color: "Custom"
+        text_color: root.text_color
+
+
+<ContentNavigationDrawer>:
+    orientation: "vertical"
+    padding: "8dp"
+    spacing: "8dp"
+
+    AnchorLayout:
+        anchor_x: "left"
+        size_hint_y: None
+        height: avatar.height
+
+        Image:
+            id: avatar
+            size_hint: None, None
+            size: "56dp", "56dp"
+            source: "data/logo/kivy-icon-256.png"
+
+    MDLabel:
+        text: "KivyMD library"
+        font_style: "Button"
+        size_hint_y: None
+        height: self.texture_size[1]
+
+    MDLabel:
+        text: "kivydevelopment@gmail.com"
+        font_style: "Caption"
+        size_hint_y: None
+        height: self.texture_size[1]
+
+    ScrollView:
+
+        DrawerList:
+            id: md_list
+
+
+<NavigationDrawer>:
+    orientation: 'vertical'
+
+    MDTopAppBar:
+        title: "Navigation Drawer"
+        elevation: 10
+        left_action_items: [["menu", lambda x: app.root.ids.nav_drawer.set_state("open")]]
+
+    Widget:
+
+
+Screen:
+
+    MDNavigationLayout:
+
+        ScreenManager:
+            id: screen_manager
+
+            Screen:
+                name: "home"
+                NavigationDrawer:
+
+                BoxLayout:
+                    MDLabel:
+                        text: "Home"
+                        halign: "center"
+
+            Screen:
+                name: "my files"
+                NavigationDrawer:
+
+                BoxLayout:
+                    MDLabel:
+                        text: "My Files"
+                        halign: "center"
+
+            Screen:
+                name: "shared with me"
+                NavigationDrawer:
+
+                BoxLayout:
+                    MDLabel:
+                        text: "Shared with me"
+                        halign: "center"
+
+            Screen:
+                name: "starred"
+                NavigationDrawer:
+
+                BoxLayout:
+                    MDLabel:
+                        text: "Starred"
+                        halign: "center"
+
+            Screen:
+                name: "recent"
+                NavigationDrawer:
+
+                BoxLayout:
+                    MDLabel:
+                        text: "Recent"
+                        halign: "center"
+
+            Screen:
+                name: "shared with others"
+                NavigationDrawer:
+
+                BoxLayout:
+                    MDLabel:
+                        text: "Shared with others"
+                        halign: "center"
+
+            Screen:
+                name: "upload"
+                NavigationDrawer:
+
+                BoxLayout:
+                    MDLabel:
+                        text: "Upload"
+                        halign: "center"
+
+
+        MDNavigationDrawer:
+            id: nav_drawer
+
+            ContentNavigationDrawer:
+                id: content_drawer

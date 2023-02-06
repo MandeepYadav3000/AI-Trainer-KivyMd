@@ -1,0 +1,99 @@
+<MagicButton@MagicBehavior+MDFillRoundFlatButton>
+
+
+<ItemDrawer>:
+    theme_text_color: "Custom"
+    on_release: self.parent.set_color_item(self)
+
+    IconLeftWidget:
+        id: icon
+        icon: root.icon
+        theme_text_color: "Custom"
+        text_color: root.text_color
+
+
+<ContentNavigationDrawer@BoxLayout>:
+    orientation: 'vertical'
+
+    AnchorLayout:
+        anchor_x: "left"
+        size_hint_y: None
+        height: avatar.height
+
+        Image:
+            id: avatar
+            size_hint: (1,1)
+            source: "Project/asset/profile.png"
+
+    MDLabel:
+        text: "User"
+        font_style: "Subtitle1"
+        size_hint_y: None
+        height: self.texture_size[1]
+
+    MDLabel:
+        text: "user@gmail.com"
+        size_hint_y: None
+        font_style: "Caption"
+        height: self.texture_size[1]
+
+    ScrollView:
+
+        MDList:
+            id: md_list
+            border: 30,30,30,30
+
+            MDList:
+                OneLineIconListItem:
+                    text: "Profile"
+
+                    IconLeftWidget:
+                        icon: "account"
+
+
+
+                OneLineIconListItem:
+                    text: "Upload"
+
+                    IconLeftWidget:
+                        icon: "upload"
+
+
+                OneLineIconListItem:
+                    text: "Logout"
+
+                    IconLeftWidget:
+                        icon: "logout"
+
+MDScreen:
+    name: "main_page"
+    MDNavigationLayout:
+        MDScreenManager:
+            MDScreen:
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    MDTopAppBar:
+                        title: 'LOGO'
+                        halign: 'left'
+                        elevation: 0
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state('toggle')]]
+                    Widget:
+
+                    MDLabel:
+                        text: 'hello world'
+                        halign: 'center'
+
+                    MDBottomAppBar:
+                        MDTopAppBar:
+                            icon: 'home-outline'
+                            type: 'bottom'
+                            elevation: 0
+                            left_action_items: [["progress-check", lambda x: setting_page()]]
+                            right_action_items: [["clock"]]
+
+
+        MDNavigationDrawer:
+            id: nav_drawer
+
+            ContentNavigationDrawer:
+                id: content_drawer
